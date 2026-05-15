@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EM vs US — External Research Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #F8F7F4;
+  --surface:  #FFFFFF;
+  --surface2: #F2F1ED;
+  --surface3: #ECEAE4;
+  --border:   #E4E1D8;
+  --border2:  #D4D0C4;
+  --text1:    #1A1916;
+  --text2:    #5A574E;
+  --text3:    #9A978E;
+  --bull:     #2E7D1A;
+  --bull-mid: #4A9E32;
+  --bull-bg:  #EBF5E5;
+  --bull-dim: #C8E8B8;
+  --bear:     #B81C1C;
+  --bear-mid: #D93C3C;
+  --bear-bg:  #FCEAEA;
+  --bear-dim: #F0C0C0;
+  --sel:      #4A3DB0;
+  --sel-mid:  #6B5ED4;
+  --sel-bg:   #EDEBFA;
+  --sel-dim:  #C8C2EE;
+  --neu:      #7A7870;
+  --neu-bg:   #F0EEE8;
+  --amber:    #9A5E10;
+  --amber-bg: #FDF2E0;
+  --radius:   5px;
+  --radius-lg:10px;
+}
+html { font-size: 13px; }
+body { background: var(--bg); font-family: 'DM Sans', system-ui, sans-serif; color: var(--text1); line-height: 1.5; }
+.page { max-width: 1120px; margin: 0 auto; padding: 2rem 1.75rem 5rem; }
+
+/* HEADER */
+.header { margin-bottom: 1.5rem; }
+.header-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--text1); letter-spacing: -0.02em; }
+.header-title em { font-style: normal; color: var(--sel); }
+.header-title span { font-size: 16px; font-weight: 400; color: var(--text2); margin-left: 6px; }
+.header-sub { font-size: 11px; color: var(--text3); margin-top: 4px; font-family: 'DM Mono', monospace; }
+
+/* BANNER */
+.banner { display: grid; grid-template-columns: auto 1fr 1fr 1fr; background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius-lg); margin-bottom: 1.5rem; overflow: hidden; }
+.banner-block { padding: 0.9rem 1.3rem; border-right: 1px solid var(--border); }
+.banner-block:last-child { border-right: none; }
+.banner-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.banner-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--text1); line-height: 1; }
+
+/* STANCE PILLS */
+.stance-split { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+.sp { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 20px; font-size: 10.5px; font-weight: 500; }
+.sp strong { font-family: 'DM Mono', monospace; font-size: 11px; }
+.sp-ow  { background: var(--bull-bg); color: var(--bull); }
+.sp-uw  { background: var(--bear-bg); color: var(--bear); }
+.sp-sel { background: var(--sel-bg);  color: var(--sel); }
+.sp-neu { background: var(--neu-bg);  color: var(--neu); }
+
+/* CONVICTION DOTS */
+.conv-indicator { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+.ci-row { display: flex; align-items: center; gap: 7px; }
+.ci-label { font-size: 10.5px; font-weight: 500; width: 65px; flex-shrink: 0; }
+.ci-dots { display: flex; gap: 3px; }
+.ci-dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid; }
+.ci-dot.f-bull { background: var(--bull-mid); border-color: var(--bull-mid); }
+.ci-dot.f-bear { background: var(--bear-mid); border-color: var(--bear-mid); }
+.ci-dot.f-sel  { background: var(--sel-mid);  border-color: var(--sel-mid); }
+.ci-dot.h-bull { background: linear-gradient(90deg,var(--bull-mid) 50%,transparent 50%); border-color: var(--bull-mid); }
+.ci-dot.h-bear { background: linear-gradient(90deg,var(--bear-mid) 50%,transparent 50%); border-color: var(--bear-mid); }
+.ci-dot.h-sel  { background: linear-gradient(90deg,var(--sel-mid) 50%,transparent 50%);  border-color: var(--sel-mid); }
+.ci-dot.e-bull { background: transparent; border-color: var(--bull-dim); }
+.ci-dot.e-bear { background: transparent; border-color: var(--bear-dim); }
+.ci-dot.e-sel  { background: transparent; border-color: var(--sel-dim); }
+.ci-text { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--text3); }
+
+/* LAYOUT */
+.grid-2 { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 1.4rem 0; }
+.section-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+
+/* CARDS */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.2rem; }
+.card-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--text1); margin-bottom: 2px; }
+.card-sub { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--text3); margin-bottom: 12px; }
+
+/* ── TABBED DRIVER PANEL ── */
+.tab-bar { display: flex; gap: 0; margin-bottom: 0; border-bottom: 2px solid var(--border); }
+.tab-btn {
+  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 8px 20px; cursor: pointer; border: none; background: none;
+  color: var(--text3); border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text1); }
+.tab-btn.active-ow  { color: var(--bull); border-bottom-color: var(--bull-mid); }
+.tab-btn.active-uw  { color: var(--bear); border-bottom-color: var(--bear-mid); }
+.tab-btn.active-sel { color: var(--sel);  border-bottom-color: var(--sel-mid); }
+.tab-panel { display: none; padding: 14px 0 0; }
+.tab-panel.active { display: block; }
+
+/* Driver category blocks inside tab */
+.dt-section { margin-bottom: 14px; }
+.dt-section:last-child { margin-bottom: 0; }
+.dt-cat-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+.dt-cat-name { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+.dt-cat-count { font-family: 'DM Mono', monospace; font-size: 8px; color: var(--text3); }
+.dt-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.dt-pill {
+  font-size: 11px; padding: 4px 10px; border-radius: 4px;
+  border: 1px solid; font-weight: 400;
+}
+.dt-pill-ow  { background: var(--bull-bg); border-color: var(--bull-dim); color: var(--bull); }
+.dt-pill-uw  { background: var(--bear-bg); border-color: var(--bear-dim); color: var(--bear); }
+.dt-pill-sel { background: var(--sel-bg);  border-color: var(--sel-dim);  color: var(--sel); }
+
+/* ── LOLLIPOP RISK CHART ── */
+.lollipop-wrap { padding-top: 4px; }
+.lollipop-row { display: flex; align-items: center; gap: 0; margin-bottom: 10px; }
+.lollipop-row:last-child { margin-bottom: 0; }
+.lollipop-label { font-size: 11px; color: var(--text1); width: 210px; flex-shrink: 0; font-weight: 500; }
+.lollipop-track { flex: 1; position: relative; height: 12px; display: flex; align-items: center; }
+.lollipop-line { position: absolute; left: 0; height: 1.5px; border-radius: 1px; }
+.lollipop-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; margin-left: -5px; }
+.lollipop-count { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--text3); width: 28px; text-align: right; flex-shrink: 0; }
+.lollipop-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 5px; border-radius: 3px; margin-left: 6px; flex-shrink: 0; }
+.lt-macro { background: var(--bear-bg); color: var(--bear); }
+.lt-geo   { background: var(--amber-bg); color: var(--amber); }
+.lt-tech  { background: var(--sel-bg); color: var(--sel); }
+.lt-flow  { background: var(--neu-bg); color: var(--neu); }
+
+/* ── CATALYST PILL CLOUD ── */
+.catalyst-section { margin-bottom: 12px; }
+.catalyst-section:last-child { margin-bottom: 0; }
+.cat-section-head { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 7px; }
+.cat-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.cat-pill-item { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.cat-pill-item.bull { background: var(--bull-bg); color: var(--bull); border: 1px solid var(--bull-dim); }
+.cat-pill-item.bear { background: var(--bear-bg); color: var(--bear); border: 1px solid var(--bear-dim); }
+.cat-pill-item.amb  { background: var(--amber-bg); color: var(--amber); border: 1px solid #E8C888; }
+.cat-n { font-family: 'DM Mono', monospace; font-size: 9px; opacity: 0.7; }
+
+/* ── VALUATION BARS ── */
+.val-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.val-row:last-child { margin-bottom: 0; }
+.val-label { font-size: 11px; font-weight: 500; color: var(--text1); width: 85px; flex-shrink: 0; }
+.val-track { flex: 1; height: 20px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+.val-fill { height: 100%; display: flex; align-items: center; padding-left: 8px; }
+.val-txt { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.9); }
+.val-aside { font-size: 10px; color: var(--text3); width: 80px; flex-shrink: 0; text-align: right; font-family: 'DM Mono', monospace; }
+
+/* ── PRICED IN ── */
+.pi-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pi-head { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+.pi-pills { display: flex; flex-direction: column; gap: 5px; }
+.pi-pill { font-size: 11px; padding: 4px 10px; border-radius: 4px; border-left: 2.5px solid; }
+.pi-pill.bear { background: var(--bear-bg); border-color: var(--bear-mid); color: var(--text2); }
+.pi-pill.bull { background: var(--bull-bg); border-color: var(--bull-mid); color: var(--text2); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">EM vs <em>US</em> Equities<span>External Research Insights</span></div>
+    <div class="header-sub">21 reports · Goldman Sachs · J.P. Morgan · UBS · Piper Sandler · Strategas · Citi · Apr 1 – Apr 27, 2026</div>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="banner-block">
+      <div class="banner-label">Reports</div>
+      <div class="banner-val">21</div>
+    </div>
+    <div class="banner-block">
+      <div class="banner-label">Stance split</div>
+      <div class="stance-split">
+        <div class="sp sp-ow"><strong>6</strong> OW EM</div>
+        <div class="sp sp-uw"><strong>8</strong> UW EM</div>
+        <div class="sp sp-sel"><strong>6</strong> Selective</div>
+        <div class="sp sp-neu"><strong>1</strong> Neutral</div>
+      </div>
+    </div>
+    <div class="banner-block">
+      <div class="banner-label">Avg conviction by stance</div>
+      <div class="conv-indicator">
+        <div class="ci-row">
+          <span class="ci-label" style="color:var(--bull);">OW EM</span>
+          <div class="ci-dots">
+            <div class="ci-dot f-bull"></div>
+            <div class="ci-dot f-bull"></div>
+            <div class="ci-dot h-bull"></div>
+          </div>
+          <span class="ci-text">Mod – Strong</span>
+        </div>
+        <div class="ci-row">
+          <span class="ci-label" style="color:var(--bear);">UW EM</span>
+          <div class="ci-dots">
+            <div class="ci-dot f-bear"></div>
+            <div class="ci-dot h-bear"></div>
+            <div class="ci-dot e-bear"></div>
+          </div>
+          <span class="ci-text">Weak – Mod</span>
+        </div>
+        <div class="ci-row">
+          <span class="ci-label" style="color:var(--sel);">Selective</span>
+          <div class="ci-dots">
+            <div class="ci-dot f-sel"></div>
+            <div class="ci-dot f-sel"></div>
+            <div class="ci-dot e-sel"></div>
+          </div>
+          <span class="ci-text">Moderate</span>
+        </div>
+      </div>
+    </div>
+    <div class="banner-block">
+      <div class="banner-label">Top risks cited</div>
+      <div style="margin-top:4px;">
+        <div style="font-size:12px;font-weight:600;color:var(--bear);font-family:'Syne',sans-serif;">USD / Yields</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:2px;">11 reports · #1 risk across all camps</div>
+        <div style="font-size:11px;color:var(--amber);margin-top:5px;font-weight:500;">Geopolitics / Oil — 9</div>
+        <div style="font-size:11px;color:var(--sel);margin-top:3px;font-weight:500;">AI / Tech breaks — 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DRIVER TABS ── -->
+  <div class="section-label">What drives each camp — primary + supporting driver fields</div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="tab-bar">
+      <button class="tab-btn active-ow" onclick="switchTab('ow',this)">Overweight EM &nbsp;<span style="font-family:'DM Mono',monospace;font-size:9px;font-weight:400;opacity:0.7;">6 reports</span></button>
+      <button class="tab-btn" onclick="switchTab('uw',this)">Underweight EM &nbsp;<span style="font-family:'DM Mono',monospace;font-size:9px;font-weight:400;opacity:0.7;">8 reports</span></button>
+      <button class="tab-btn" onclick="switchTab('sel',this)">Selective &nbsp;<span style="font-family:'DM Mono',monospace;font-size:9px;font-weight:400;opacity:0.7;">6 reports</span></button>
+    </div>
+
+    <!-- OW EM TAB -->
+    <div id="tab-ow" class="tab-panel active">
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bull);">Macro</span>
+          <span class="dt-cat-count">8 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-ow">Stimulative backdrop lifts cyclical breadth</span>
+          <span class="dt-pill dt-pill-ow">Weaker USD re-rates EM vs US</span>
+          <span class="dt-pill dt-pill-ow">De-globalization creates new EM winners</span>
+          <span class="dt-pill dt-pill-ow">Diversification payoff vs US concentration</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bull);">Fundamentals</span>
+          <span class="dt-cat-count">4 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-ow">EM EPS revisions widening vs US</span>
+          <span class="dt-pill dt-pill-ow">EM balance sheets resilient; no BoP stress</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bull);">Valuation</span>
+          <span class="dt-cat-count">3 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-ow">EM cheap + underowned vs crowded US</span>
+          <span class="dt-pill dt-pill-ow">Wide EM/DM discount — asymmetric upside</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bull);">Sentiment</span>
+          <span class="dt-cat-count">3 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-ow">EM underowned; inflows resuming</span>
+          <span class="dt-pill dt-pill-ow">Re-risking room vs crowded US</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- UW EM TAB -->
+    <div id="tab-uw" class="tab-panel">
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bear);">Macro</span>
+          <span class="dt-cat-count">8 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-uw">US capex +8% lifts growth + USD</span>
+          <span class="dt-pill dt-pill-uw">US policy / tax advantage vs EM</span>
+          <span class="dt-pill dt-pill-uw">Reshoring accelerates US goods capex</span>
+          <span class="dt-pill dt-pill-uw">No USD/rate cuts = EM cyclicals lag</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bear);">Sentiment</span>
+          <span class="dt-cat-count">7 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-uw">US Tech ETF flows re-accelerating</span>
+          <span class="dt-pill dt-pill-uw">S&P new highs — "pressure to chase"</span>
+          <span class="dt-pill dt-pill-uw">Risk capital concentrating in US AI</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bear);">Fundamentals</span>
+          <span class="dt-cat-count">6 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-uw">US Tech / AI earnings; no EM equivalent</span>
+          <span class="dt-pill dt-pill-uw">Semis weight boosts US vs China EM</span>
+          <span class="dt-pill dt-pill-uw">China long-run returns / drawdowns worse</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--bear);">Technicals</span>
+          <span class="dt-cat-count">4 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-uw">Persistent US momentum post-conflict</span>
+          <span class="dt-pill dt-pill-uw">China internet sharp drawdown drag</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELECTIVE TAB -->
+    <div id="tab-sel" class="tab-panel">
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--sel);">Macro</span>
+          <span class="dt-cat-count">8 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-sel">Oil regime favors EM commodity exporters</span>
+          <span class="dt-pill dt-pill-sel">EM-DM growth spread at historic lows</span>
+          <span class="dt-pill dt-pill-sel">Easier fin. conditions improve EM access</span>
+          <span class="dt-pill dt-pill-sel">USD weakening supports EM FX returns</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--sel);">Fundamentals</span>
+          <span class="dt-cat-count">4 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-sel">Korea AI / hyperscaler capex OW</span>
+          <span class="dt-pill dt-pill-sel">EM earnings revisions outpacing US</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--sel);">Sentiment</span>
+          <span class="dt-cat-count">4 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-sel">Korea foreign selloff — mean reversion</span>
+          <span class="dt-pill dt-pill-sel">EM flows turned from outflows to inflows</span>
+        </div>
+      </div>
+      <div class="dt-section">
+        <div class="dt-cat-header">
+          <span class="dt-cat-name" style="color:var(--sel);">Technicals</span>
+          <span class="dt-cat-count">3 citations</span>
+        </div>
+        <div class="dt-pills">
+          <span class="dt-pill dt-pill-sel">EM post-ceasefire rebound stronger</span>
+          <span class="dt-pill dt-pill-sel">EM screens well on risk / reward</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── RISK + CATALYST ── -->
+  <div class="grid-2" style="margin-bottom:12px;">
+
+    <!-- LOLLIPOP RISK CHART -->
+    <div class="card">
+      <div class="card-title">Downside risks</div>
+      <div class="card-sub">reports citing each scenario · across all 21 reports</div>
+      <div class="lollipop-wrap" id="lollipop"></div>
+    </div>
+
+    <!-- CATALYST PILL CLOUD -->
+    <div class="card">
+      <div class="card-title">Catalysts &amp; triggers</div>
+      <div class="card-sub">view-change signals · from catalyst description fields</div>
+
+      <div class="catalyst-section">
+        <div class="cat-section-head" style="color:var(--bull);">Bull — EM positive</div>
+        <div class="cat-pills">
+          <span class="cat-pill-item bull">EM inflows resume <span class="cat-n">18</span></span>
+          <span class="cat-pill-item bull">AI / semis momentum <span class="cat-n">12</span></span>
+          <span class="cat-pill-item bull">USD weakens / Fed cuts <span class="cat-n">8</span></span>
+          <span class="cat-pill-item bull">EM earnings upgrade <span class="cat-n">8</span></span>
+          <span class="cat-pill-item bull">PMI broadening confirms <span class="cat-n">4</span></span>
+          <span class="cat-pill-item bull">LatAm commodity shift <span class="cat-n">2</span></span>
+        </div>
+      </div>
+
+      <div class="catalyst-section" style="margin-top:12px;">
+        <div class="cat-section-head" style="color:var(--amber);">Bilateral — direction depends on outcome</div>
+        <div class="cat-pills">
+          <span class="cat-pill-item amb">Geopolitical de-escalation <span class="cat-n">5</span></span>
+          <span class="cat-pill-item amb">Oil price direction</span>
+          <span class="cat-pill-item amb">China rebound / drag</span>
+        </div>
+      </div>
+
+      <div class="catalyst-section" style="margin-top:12px;">
+        <div class="cat-section-head" style="color:var(--bear);">Bear — US positive</div>
+        <div class="cat-pills">
+          <span class="cat-pill-item bear">US capex broadens + USD up</span>
+          <span class="cat-pill-item bear">S&P AI earnings re-accelerate</span>
+          <span class="cat-pill-item bear">US flows sustain leadership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VALUATION + PRICED IN ── -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Forward P/E snapshot</div>
+      <div class="card-sub">UBS and JPM primary driver evidence fields</div>
+      <div class="val-row">
+        <div class="val-label">S&amp;P 500</div>
+        <div class="val-track"><div class="val-fill" style="width:100%;background:var(--bear-mid);"><span class="val-txt">~21x · crowded · full</span></div></div>
+        <div class="val-aside">+1σ expensive</div>
+      </div>
+      <div class="val-row">
+        <div class="val-label">MSCI EM</div>
+        <div class="val-track"><div class="val-fill" style="width:57%;background:var(--bull-mid);"><span class="val-txt">~12x · cheap</span></div></div>
+        <div class="val-aside">–1σ discount</div>
+      </div>
+      <div class="val-row">
+        <div class="val-label">MSCI Korea</div>
+        <div class="val-track"><div class="val-fill" style="width:43%;background:var(--sel-mid);"><span class="val-txt">~9x · high conv. OW</span></div></div>
+        <div class="val-aside">Highest conv.</div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+        EM/DM discount ~38% vs ~27% hist. avg · ~11pts compression potential
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Priced in vs not priced in</div>
+      <div class="card-sub">priced-in expectations field · all reports</div>
+      <div class="pi-cols">
+        <div>
+          <div class="pi-head" style="color:var(--bear);">Already reflected</div>
+          <div class="pi-pills">
+            <div class="pi-pill bear">US 18%+ EPS in consensus</div>
+            <div class="pi-pill bear">Post-conflict de-escalation</div>
+            <div class="pi-pill bear">Front-end rate rally</div>
+            <div class="pi-pill bear">US spreads historically tight</div>
+            <div class="pi-pill bear">EM valuation de-rating</div>
+          </div>
+        </div>
+        <div>
+          <div class="pi-head" style="color:var(--bull);">Not yet reflected</div>
+          <div class="pi-pills">
+            <div class="pi-pill bull">EM discount compression</div>
+            <div class="pi-pill bull">Korea re-rating on selloff</div>
+            <div class="pi-pill bull">EM EPS upgrade cycle</div>
+            <div class="pi-pill bull">LatAm terms-of-trade shift</div>
+            <div class="pi-pill bull">USD weakness re-rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* TAB SWITCHING */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active-ow','active-uw','active-sel');
+  });
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active-' + id);
+}
+
+/* LOLLIPOP CHART
+   Data grounded from risk keyword frequency analysis:
+   USD/yields 11, Geo/oil 9, AI/Tech 6, EM FX 5, Valuation structural 4,
+   EM earnings 3, EM flows 3, PMI/broadening 3                            */
+const risks = [
+  { label: 'USD strength / yields elevated', n: 11, color: '#D93C3C', tag: 'Macro',   tagClass: 'lt-macro' },
+  { label: 'Geopolitical escalation / oil',  n:  9, color: '#9A5E10', tag: 'Geo',     tagClass: 'lt-geo'   },
+  { label: 'AI / Tech momentum breaks',      n:  6, color: '#6B5ED4', tag: 'Tech',    tagClass: 'lt-tech'  },
+  { label: 'EM FX / fin. conditions',        n:  5, color: '#D93C3C', tag: 'Macro',   tagClass: 'lt-macro' },
+  { label: 'Valuation discount structural',  n:  4, color: '#7A7870', tag: 'Val',     tagClass: 'lt-flow'  },
+  { label: 'EM earnings disappoint',         n:  3, color: '#7A7870', tag: 'Fund',    tagClass: 'lt-flow'  },
+  { label: 'EM flows fail to recover',       n:  3, color: '#7A7870', tag: 'Flow',    tagClass: 'lt-flow'  },
+  { label: 'PMI / broadening fails',         n:  3, color: '#7A7870', tag: 'Macro',   tagClass: 'lt-macro' },
+];
+const MAX = 11;
+const wrap = document.getElementById('lollipop');
+risks.forEach(r => {
+  const pct = (r.n / MAX) * 100;
+  wrap.innerHTML += `
+    <div class="lollipop-row">
+      <div class="lollipop-label">${r.label}</div>
+      <span class="lollipop-tag ${r.tagClass}">${r.tag}</span>
+      <div class="lollipop-track">
+        <div class="lollipop-line" style="width:${pct}%;background:${r.color};opacity:0.25;"></div>
+        <div class="lollipop-dot"  style="left:${pct}%;background:${r.color};"></div>
+      </div>
+      <div class="lollipop-count">${r.n}</div>
+    </div>`;
+});
+</script>
+</body>
+</html>

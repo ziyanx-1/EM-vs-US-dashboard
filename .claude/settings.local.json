@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(pip install *)",
+      "Bash(python -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(pip list *)",
+      "Bash(pip config *)",
+      "Bash(where python *)",
+      "Bash(conda list *)",
+      "Bash(conda info *)",
+      "Bash(python -c \"import openpyxl; print\\(openpyxl.__version__\\)\")",
+      "PowerShell(conda info --envs 2>&1)",
+      "PowerShell(python -c \"import openpyxl; print\\(openpyxl.__version__\\)\" 2>&1)",
+      "Bash(git add *)"
+    ]
+  }
+}

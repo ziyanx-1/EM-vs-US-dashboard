@@ -1,0 +1,10 @@
+# Excel temporary lock files
+~$*
+
+# IDE
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.env
