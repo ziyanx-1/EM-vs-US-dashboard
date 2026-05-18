@@ -190,13 +190,14 @@ for idx in range(1, len(df_raw)):
 
 df = pd.DataFrame(records)
 
-# Filter: keep rows where at least one region has a real classification
+# Filter: keep rows where at least two regions have a real classification
 def has_classification(row):
+    count = 0
     for r in REGIONS:
         val = str(row.get(f"{r} Classification", "")).strip().lower()
         if val and val not in ("not discussed", "na", "nan", ""):
-            return True
-    return False
+            count += 1
+    return count >= 2
 
 mask = df.apply(has_classification, axis=1)
 df_filtered = df[mask].reset_index(drop=True)
